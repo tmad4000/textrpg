@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>TextRPG</title>
+  <style type="text/css">
+  body {
+    background: cornsilk;
+  }
+
+
+  #box {
+    width: 600px;
+    background-color: black;
+    padding:0 10px;
+
+  }
+  #out {
+    color: white;
+    background-color: transparent;
+    width: 100%;
+    height: 300px;
+    overflow: scroll;
+  }
+
+
+  #inBox {
+    width: 100%;
+    height: 40px;
+    list-style-type: circle;
+
+  }
+
+  #in {
+    height: 100%;
+    width: 95%;
+
+
+    background-color: transparent;
+    border: none;
+    color: white;
+
+  }
+
+  .line {
+    color: white;
+    white-space: pre-wrap;
+    list-style-type: none;
+
+  }
+
+  .lineb {
+    color: green;
+    white-space: pre-wrap;
+    list-style-type: circle;
+  }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script>
+
+    $(function() {
+
+
+      // yourState={loc:0,items:{lamp:1,key:1,foodbar:5}};
+      map=[
+        {placeDesc:"dim room",neighbors:[1,2]},
+        {placeDesc:"staircase",neighbors:[0]},
+        {placeDesc:"trapdoor",neighbors:[0,3]},
+        {placeDesc:"dungeon",neighbors:[2]},
+      ]
+
+      function tExec(c) {
+        $("#out").append($('<li class="lineb"></li>').text(c));
+
+        c=parseInt(c);
+
+        if(c in currOpts) {
+          prevLoc=yourLoc;
+          yourLoc=currOpts[c]
+          currOpts=map[yourLoc].neighbors
+        }
+        else {
+          tPrintLn("Invalid option")
+        }
+
+      }
+
+      function tPrintLn(c) {
+        $("#out").append($('<li class="line"></li>').text(c));
+      }
+
+      function printState() {
+        tPrintLn("\n\nYou are in a " + (map[yourLoc].placeDesc))
+        tPrintLn("Options:")
+        $.map(currOpts, function(e,i) {
+          tPrintLn(i + ") " + (e===prevLoc? "[back] ":"") + map[e].placeDesc)
+        })
+      }
+
+
+
+
+      $("#in").keypress(function(event){
+          var keycode = (event.keyCode ? event.keyCode : event.which);
+          if(keycode == '13'){
+
+            tExec($(this).val())
+            $(this).val("")
+
+            printState()
+
+            $("#out").scrollTop($("#out").prop("scrollHeight"));
+          }
+      });
+
+
+      // tPrintLn("You are in a dim room\n1) Light Candle \n2) Feel for wall")
+
+      prevLoc=2;
+      yourLoc=2;
+      currOpts=map[yourLoc].neighbors
+
+
+
+      $("#in").focus();
+      printState()
+
+
+    })
+  </script>
+</head>
+<body>
+  <div id="box">
+    <div id="out"></div>
+    <div id="inBox">
+  <li class="line"><input type="text" id="in" value="dfdsf"/></li>
+</div>
+    <!-- <textarea id="in"></textarea> -->
+  </div>
+
+</body>
+</html>

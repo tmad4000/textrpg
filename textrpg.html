@@ -5,7 +5,11 @@
   <title>TextRPG</title>
   <style type="text/css">
   body {
-    background: cornsilk;
+    /*background: cornsilk;*/
+    background: black;
+    font-family: "Courier New";
+    font-size:16px;
+
   }
 
 
@@ -20,16 +24,18 @@
     background-color: transparent;
     width: 100%;
     height: 300px;
-    overflow: scroll;
+    overflow: auto;
   }
 
 
   #inBox {
     width: 100%;
     height: 40px;
-    list-style-type: circle;
+
 
   }
+
+
 
   #in {
     height: 100%;
@@ -39,21 +45,28 @@
     background-color: transparent;
     border: none;
     color: white;
+    font-family: "Courier New";
+    font-size:16px;
+
 
   }
 
   .line {
-    color: white;
+    color: lightgreen;
     white-space: pre-wrap;
-    list-style-type: none;
+    list-style: none;
 
   }
 
   .lineb {
-    color: green;
+    color: white;
     white-space: pre-wrap;
-    list-style-type: circle;
+    list-style-type: none;
   }
+
+  li.lineb:before { content: '> '}
+
+
   </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -134,7 +147,7 @@
   <div id="box">
     <div id="out"></div>
     <div id="inBox">
-  <li class="line"><input type="text" id="in" value="dfdsf"/></li>
+  <li class="lineb"><input type="text" id="in" /></li>
 </div>
     <!-- <textarea id="in"></textarea> -->
   </div>

@@ -40,6 +40,7 @@
   #in {
     height: 100%;
     width: 95%;
+    outline:none;
 
 
     background-color: transparent;
@@ -105,7 +106,7 @@
 
       function printState() {
         tPrintLn("\n\nYou are in a " + (map[yourLoc].placeDesc))
-        tPrintLn("Options:")
+        tPrintLn("Where would you like to go?")
         $.map(currOpts, function(e,i) {
           tPrintLn(i + ") " + (e===prevLoc? "[back] ":"") + map[e].placeDesc)
         })
@@ -130,9 +131,21 @@
 
       // tPrintLn("You are in a dim room\n1) Light Candle \n2) Feel for wall")
 
-      prevLoc=2;
-      yourLoc=2;
+      prevLoc=0;
+      yourLoc=0;
       currOpts=map[yourLoc].neighbors
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
